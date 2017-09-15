@@ -258,7 +258,7 @@
             CGFloat actualMoveDistance = fabs(offset_x-_layout.scrollPageWidth*minPage)*waitMoveDistance/_layout.scrollPageWidth;
             /* 计算x坐标 */
             CGFloat line_x = minPageOffset_x+actualMoveDistance-changeWidth*nextScale/2;
-            self.line.frame = CGRectMake(line_x, CGRectGetMinY(self.line.frame), lineWidth, CGRectGetHeight(self.line.frame));
+            self.line.frame = CGRectMake(line_x-_layout.lineScaleOutWidth, CGRectGetMinY(self.line.frame), lineWidth+2*_layout.lineScaleOutWidth, CGRectGetHeight(self.line.frame));
         }
             break;
         default:
