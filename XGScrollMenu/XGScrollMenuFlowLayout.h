@@ -11,7 +11,7 @@
 
 /**
  展示类型
-
+ 
  - XGScrollMenuTypeUnderLineFixedWidth: 固定下划线宽度
  - XGScrollMenuTypeUnderLineAutoWidth: 下划线宽度自适应
  - XGScrollMenuTypeWithOutUnderLine: 不展示下划线
@@ -71,6 +71,8 @@ typedef NS_ENUM(NSInteger, XGScrollMenuType) {
 @property(nonatomic, assign)CGFloat titleChangeAnimationTime;
 /* 禁止滚动，标题平分 */
 @property(nonatomic, assign)BOOL scrollDisabled;
+/* 自动判断是否平分宽度，宽度小于屏幕时平分，否则不平分 */
+@property (nonatomic, assign) BOOL  autoJudgeEnable;
 
 #pragma mark - 配置只读属性
 /* 左侧菜单size */
@@ -82,7 +84,7 @@ typedef NS_ENUM(NSInteger, XGScrollMenuType) {
 
 /**
  默认构造样式
-
+ 
  @return instancetype
  */
 + (instancetype)defaultFlowLayout;
@@ -104,3 +106,4 @@ typedef NS_ENUM(NSInteger, XGScrollMenuType) {
 - (UIColor *)fetchChangedColor:(CGFloat)scale;
 
 @end
+

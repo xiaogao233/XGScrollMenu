@@ -54,10 +54,11 @@
         _selectedTitleColor = [self colorWithHexString:@"#FF5005"];
         _scrollPageWidth = [UIScreen mainScreen].bounds.size.width;
         _backgroundColor = [UIColor whiteColor];
-        _lineScaleOutWidth = 20;
+        _lineScaleOutWidth = 0;
         _fontScale = _selectedFontSize/_titleFontSize-1;
         _titleChangeAnimationTime = 0.15;
         _changeTitleStateWhenScaleOutWidth = 8;
+        _autoJudgeEnable = YES;
         switch (_menuType) {
             case XGScrollMenuTypeWithOutUnderLine:
             {
@@ -80,7 +81,7 @@
 
 /**
  构造方法
-
+ 
  @param menuType 样式类型
  @return instancetype
  */
@@ -134,7 +135,7 @@
 
 /**
  获取改变颜色
-
+ 
  @param scale 比例
  @return UIColor
  */
@@ -157,9 +158,9 @@
     
     if (colorStr.length == 3)
         colorStr = [NSString stringWithFormat:@"%c%c%c%c%c%c",
-                           [colorStr characterAtIndex:0], [colorStr characterAtIndex:0],
-                           [colorStr characterAtIndex:1], [colorStr characterAtIndex:1],
-                           [colorStr characterAtIndex:2], [colorStr characterAtIndex:2]];
+                    [colorStr characterAtIndex:0], [colorStr characterAtIndex:0],
+                    [colorStr characterAtIndex:1], [colorStr characterAtIndex:1],
+                    [colorStr characterAtIndex:2], [colorStr characterAtIndex:2]];
     if (colorStr.length == 6)
     {
         int r, g, b;
@@ -210,3 +211,4 @@
 }
 
 @end
+

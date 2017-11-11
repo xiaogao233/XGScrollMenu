@@ -13,7 +13,7 @@
 
 /**
  点击menu菜单的点击回调
-
+ 
  @param index 当前点击menu
  @return 主页面的scrollView是否有滚动动画，必须一致，不一致会导致显示异常
  */
@@ -30,7 +30,7 @@
 
 /**
  构造方法
-
+ 
  @param frame 视图Frame
  @param layout 配置信息
  @return instancetype
@@ -39,16 +39,17 @@
 
 /**
  在scrollViewDidScroll中执行
-
+ 
  @param scrollView 滚动视图
  */
 - (void)scrollMenuDidScroll:(UIScrollView *)scrollView;
 
 /**
  在scrollViewDidEndDecelerating中执行
-
+ 
  @param scrollView 滚动视图
  */
 - (void)scrollMenuDidEndDecelerating:(UIScrollView *)scrollView;
 
 @end
+

@@ -59,6 +59,17 @@
 - (void)initMenuItemLayout
 {
     CGFloat offset_x = _layout.leftTitleInterval;
+    
+    if (_layout.autoJudgeEnable) {
+        CGFloat totalWidth = 0;
+        for (NSString *title in _layout.titleArray) {
+            totalWidth+=[self widthForString:title]+_layout.titleInterval;
+        }
+        if (totalWidth<=CGRectGetWidth(self.frame)) {
+            _layout.scrollDisabled = YES;
+        }
+    }
+    
     for (int i = 0; i<_layout.titleArray.count; i++)
     {
         NSString *title = _layout.titleArray[i];
@@ -94,7 +105,7 @@
 
 /**
  滚动到当前页
-
+ 
  @param isManual 是否手动
  */
 - (void)scrollMenuToCurPage:(BOOL)isManual
@@ -142,7 +153,7 @@
 
 /**
  移动下划线
-
+ 
  @param offset_x offset_x
  */
 - (void)moveUnderLineWithOffset_x:(CGFloat)offset_x
@@ -192,6 +203,34 @@
     switch (_layout.menuType) {
         case XGScrollMenuTypeUnderLineAutoWidth:
         {
+            /* 还原所有页面状态 */
+            for (UILabel *label in self.scrollView.subviews) {
+                if ([label isKindOfClass:[UILabel class]]) {
+                    label.textColor = _layout.titleColor;
+                }
+            }
+            if ([preMenu isKindOfClass:[UILabel class]])
+            {
+                preMenu.textColor = _layout.titleColor;
+                /* 前一页移过的距离 */
+                CGFloat preDistance = nextScale*CGRectGetWidth(preMenu.frame);
+                /* 改变标题状态 */
+                if (preDistance<_layout.changeTitleStateWhenScaleOutWidth)
+                {
+                    preMenu.textColor = _layout.selectedTitleColor;
+                }
+            }
+            if ([nextMenu isKindOfClass:[UILabel class]])
+            {
+                /* 后一页移过的距离 */
+                CGFloat netxDistance = preScale*CGRectGetWidth(nextMenu.frame);
+                /* 改变标题状态 */
+                nextMenu.textColor = _layout.titleColor;
+                if (netxDistance<_layout.changeTitleStateWhenScaleOutWidth)
+                {
+                    nextMenu.textColor = _layout.selectedTitleColor;
+                }
+            }
             /* 根据左右滑动分别处理 */
             if (isMoveRight)
             {
@@ -284,7 +323,7 @@
 
 /**
  根据当前contentOffset获取所在页码
-
+ 
  @param offset_x contentOffset
  @return 所在页码
  */
@@ -299,7 +338,7 @@
 
 /**
  根据页码，获取已经移动的距离
-
+ 
  @param pageNumb 页码
  @return CGFloat
  */
@@ -378,3 +417,4 @@
 }
 
 @end
+
